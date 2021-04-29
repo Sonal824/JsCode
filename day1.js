@@ -43,8 +43,29 @@ LinkedList.prototype.insertAtBeginning = function(data) {
 }
 
 list.insertAtBeginning(1);
-console.log(list);
 list.insertAtBeginning(2);
-console.log(list);
 list.insertAtBeginning(3);
+
+
+LinkedList.prototype.insertAtEnd = function(data) {
+
+    // Create node with value and next
+    let newNode = new Node(data);
+
+    // if head is null means its first element
+    if(this.head == null) {
+        this.head = newNode;
+        return this.head;
+    } 
+
+    // traverse through linked list until tail is null
+     tail = this.head;
+     while(tail.next != null) {
+        tail = tail.next;
+     }
+     tail.next = newNode;
+     return this.head;
+}
+
+list.insertAtEnd(4);
 console.log(list);
