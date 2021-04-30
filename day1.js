@@ -1,24 +1,25 @@
 /* Linked List */
 
-// Node Class with data and next
+/** 
+ * Node Class with data and next
+ * Below code will initialize object with 2 properties
+ */ 
 class Node {
     constructor(data,next = null) {
         this.data = data;
         this.next = next;
     }
 }
-// The above code will initialize object with 2 properties
 
-// Linked List Class which maintains head pointer of the list
+/** 
+ * Linked List Class which maintains head pointer of the list
+ * Below code will initialize object with head property
+ */ 
 class LinkedList {
     constructor(){
         this.head = null;
     }
 }
-// The above code will initialize object with head property
-
-// A linked list object created with property head as null
-let list = new LinkedList();
 
 /** Insert Operation 
  * New node before head - at beginning of the list
@@ -26,7 +27,6 @@ let list = new LinkedList();
  * New node in middle of the list - at any random position
 */
 
-// Create node
 LinkedList.prototype.insertAtBeginning = function(data) {
 
     // Create node
@@ -41,11 +41,6 @@ LinkedList.prototype.insertAtBeginning = function(data) {
     return this.head;
 
 }
-
-list.insertAtBeginning(1);
-list.insertAtBeginning(2);
-list.insertAtBeginning(3);
-
 
 LinkedList.prototype.insertAtEnd = function(data) {
 
@@ -86,7 +81,7 @@ LinkedList.prototype.insertAt = function(data, index) {
 
     // Find position and insert node
     const previousNode = this.getAt(index - 1);
-    console.log(previousNode)
+
     // Insert node
     newNode.next = previousNode.next;
     previousNode.next = newNode;
@@ -107,32 +102,73 @@ LinkedList.prototype.getAt = function(index){
     return null;
 }
 
-list.insertAt(6,2);
-console.log(list);
-
-/** 
- * Revision : Linked List (Singly)
- * One element / node is linked to another element or node 
- * Node
- * Head - Start of linked list
- * Class Node {val, next}
- * Class Linked List { head = null }
- * Insert operations
- * Insert at beginning
- * create new node -> newNode.next = this.head.next -> this.head = newNode 
- * Insert at end
- * traverse till next == null
- * tail = this.head
- * while(tail.next != null) {
- *  tail = tail.next;
- * }
- * tail.next = new node;
- * Insert at given position
- * find position of prev element -> newNode.next = prev.next -> prev.next = newNode
- * node = this.head;
- * while(node){
- * if(curr == index) return node;
- * counter++;
- * node = node.next
- * }
+/**
+ * Delete Operation
+ * Delete first node
+ * Delete last node
+ * Delete node from middle of list at given position
  */
+
+ LinkedList.prototype.deleteFirstNode = function() {
+     if(!this.head)
+        return;
+     this.head = this.head.next;
+     return this.head;
+ }  
+
+ LinkedList.prototype.deleteLastNode = function() {
+    
+    // If head is null
+    if(!this.head)
+        return;
+
+     // If only one element
+     if(!this.head.next){
+        this.head == null;
+        return;
+     }   
+
+     // Traverse till last element and capture prev element
+     prev = this.head;
+     tail = this.head.next;
+     while(tail.next !== null){
+        prev = tail;
+        tail = tail.next;
+     }
+
+     prev.next = null;
+     return this.head;
+ }
+
+ LinkedList.prototype.deleteAt = function(index) {
+
+     // if no head
+     if(!this.head)
+        return;
+
+    // if index is 0
+    if(index == 0){
+        this.head = this.head.next;
+        return;
+    }
+
+    // find given position
+    var previousNode = this.getAt(index - 1);
+    if(!previousNode && !previousNode.next) {
+        return;
+    }
+    previousNode.next = previousNode.next.next;
+    return this.head;
+ }
+
+// A linked list object created with property head as null
+let list = new LinkedList();
+list.insertAtBeginning(4);
+list.insertAtBeginning(3);
+list.insertAtBeginning(2);
+list.insertAtBeginning(1);
+list.deleteFirstNode();
+list.deleteLastNode();
+list.deleteAt(1);
+
+console.log(list);
