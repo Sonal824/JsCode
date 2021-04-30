@@ -67,5 +67,72 @@ LinkedList.prototype.insertAtEnd = function(data) {
      return this.head;
 }
 
-list.insertAtEnd(4);
+LinkedList.prototype.insertAt = function(data, index) {
+
+    // Create new node
+    let newNode = new Node(data);
+
+    // If the list is empty
+    if(this.head == null){
+        this.head = newNode;
+        return;
+    }
+    
+    // If index is zero, insert at first position
+    if(index == 0){
+        this.head = new Node(data, this.head);
+        return;
+    }
+
+    // Find position and insert node
+    const previousNode = this.getAt(index - 1);
+    console.log(previousNode)
+    // Insert node
+    newNode.next = previousNode.next;
+    previousNode.next = newNode;
+
+    return this.head;
+}
+
+LinkedList.prototype.getAt = function(index){
+    let counter = 0;
+    let node = this.head;
+    while (node) {
+        if (counter === index) {
+           return node;
+        }
+        counter++;
+        node = node.next;
+    }
+    return null;
+}
+
+list.insertAt(6,2);
 console.log(list);
+
+/** 
+ * Revision : Linked List (Singly)
+ * One element / node is linked to another element or node 
+ * Node
+ * Head - Start of linked list
+ * Class Node {val, next}
+ * Class Linked List { head = null }
+ * Insert operations
+ * Insert at beginning
+ * create new node -> newNode.next = this.head.next -> this.head = newNode 
+ * Insert at end
+ * traverse till next == null
+ * tail = this.head
+ * while(tail.next != null) {
+ *  tail = tail.next;
+ * }
+ * tail.next = new node;
+ * Insert at given position
+ * find position of prev element -> newNode.next = prev.next -> prev.next = newNode
+ * node = this.head;
+ * while(node){
+ * if(curr == index) return node;
+ * counter++;
+ * node = node.next
+ * }
+ */
