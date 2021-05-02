@@ -161,14 +161,7 @@ LinkedList.prototype.getAt = function(index){
     return this.head;
  }
 
-// A linked list object created with property head as null
-let list = new LinkedList();
-list.insertAtBeginning(4);
-list.insertAtBeginning(3);
-list.insertAtBeginning(2);
-list.insertAtBeginning(1);
-list.deleteFirstNode();
-list.deleteLastNode();
-list.deleteAt(1);
-
-console.log(list);
+ module.exports = {
+    LinkedList : LinkedList,
+    Node : Node
+  }
